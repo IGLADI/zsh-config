@@ -69,6 +69,9 @@ echo "\033[34mPATH updated.\033[0m"
 
 echo "\033[34mInstalling exa...\033[0m"
 curl https://sh.rustup.rs -sSf | sh
+# reload path
+source $HOME/.cargo/env
+source $HOME/.cargo/bin
 rustup default stable
 cargo install exa
 echo "\033[34mexa installed.\033[0m"

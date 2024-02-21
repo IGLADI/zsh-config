@@ -178,9 +178,7 @@ alias lst3='exa --tree -L3 -F --icons --git --sort extension --group-directories
 alias lst4='exa --tree -L4 -F --icons --git --sort extension --group-directories-first'
 alias lst5='exa --tree -L5 -F --icons --git --sort extension --group-directories-first'
 alias ls.='exa -dl .*'
-which exa >/dev/null 2>&1 &&
-    alias ls='l' ||
-    alias ls='ls --color --group-directories-first --sort=extension'
+alias ls='l' || alias ls='ls --color --group-directories-first --sort=extension'
 
 # colorls on cd
 my_chpwd_hook() lsimple
