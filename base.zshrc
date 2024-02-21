@@ -51,6 +51,8 @@ unsetopt beep
 # Load zplug
 source ~/.zplug/init.zsh
 
+# add p10k theme
+zplug romkatv/powerlevel10k, as:theme, depth:1
 # zsh plugins for auto suggestion and autofill with right arrow
 zplug "zsh-users/zsh-autosuggestions"
 # ! seems to lag with this one activated in wsl2 without desactivating windows path in /etc/wsl.conf or ZSH_HIGHLIGHT_DIRS_BLACKLIST+=("/cygdrive" "/mnt/c" "/mnt/d" "/mnt/e")
