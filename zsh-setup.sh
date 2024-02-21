@@ -25,6 +25,7 @@ sudo apt install zsh -y
 
 echo "\033[34mSetting Zsh as the default shell...\033[0m"
 sudo chsh -s $(which zsh)
+chsh -s $(which zsh)
 
 echo "\033[34mInstalling zplug...\033[0m"
 rm -rf ~/.zplug
