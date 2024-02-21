@@ -72,7 +72,7 @@ zplug "junegunn/fzf"
 # little notif box when a long running task is done
 zplug "MichaelAquilina/zsh-auto-notify"
 # # add notify-send to wsl path
-# export PATH=$PATH:/home/glad/wsl-notify-send_windows_amd64
+# export PATH=$PATH:~/wsl-notify-send_windows_amd64
 # auto set } with { like an IDE would
 zplug "hlissner/zsh-autopair"
 # little "you should use..." when an alias exist for your command
