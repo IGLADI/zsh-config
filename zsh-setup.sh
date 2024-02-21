@@ -3,6 +3,12 @@
 echo "\033[34mInstalling git...\033[0m"
 sudo apt install git -y
 
+echo "\033[34mInstalling curl...\033[0m"
+sudo apt install curl -y
+
+echo "\033[34mInstalling python&pip...\033[0m"
+sudo apt install python3 python3-pip -y
+
 echo "\033[34mUpdating and upgrading the system...\033[0m"
 sudo apt update -y && apt upgrade -y
 
