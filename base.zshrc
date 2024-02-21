@@ -126,8 +126,8 @@ bindkey -M main -M viins -M vicmd -M emacs '^[[3;5~' kill-wor
 # eval "$(register-python-argcomplete3 colcon)"
 # complete -o default -F _python_argcomplete "colcon"
 
-# add basic pip completion (won't complete packages)
-eval "$(register-python-argcomplete3 pip)"
+# # add basic pip completion (won't complete packages)
+# eval "$(register-python-argcomplete3 pip)"
 
 # use RTX instead of intel GPU
 export MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA
