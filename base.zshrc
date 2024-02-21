@@ -104,6 +104,7 @@ export ZSH_AUTOSUGGEST_STRATEGY=(
 # Move between words with Ctrl+Arrows
 bindkey '^[[1;5C' forward-word
 bindkey '^[[1;5D' backward-word
+# TODO select with shift+arrows
 # Delete complete word using Ctrl+Backspace & Ctrl+Delete
 bindkey -M main -M viins -M vicmd -M emacs '^H' backward-kill-word
 bindkey -M main -M viins -M vicmd -M emacs '^[[3;5~' kill-wor
