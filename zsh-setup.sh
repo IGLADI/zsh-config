@@ -6,6 +6,8 @@ sudo apt install git -y
 echo "\033[34mInstalling curl...\033[0m"
 sudo apt install curl -y
 
+sudo apt install build-essential -ys
+
 echo "\033[34mInstalling python&pip...\033[0m"
 sudo apt install python3 python3-pip -y
 sudo apt install argcomplete3 -y
@@ -15,11 +17,17 @@ activate-global-python-argcomplete -y
 echo "\033[34mUpdating and upgrading the system...\033[0m"
 sudo apt update -y && apt upgrade -y
 
+echo "\033[34mInstalling bat...\033[0m"
+sudo apt install bat -y
+
 echo "==================================================================="
 echo "\033[34mCopying the base config files...\033[0m"
 cp ./base.zshrc ~/.zshrc
 cp base.p10k.zsh ~/.p10k.zsh
 echo "\033[34mConfig files copied.\033[0m"
+
+echo "\033[34mInstalling fzf...\033[0m"
+sudo apt install fzf -y
 
 echo "\033[34mInstalling Zsh...\033[0m"
 sudo apt install zsh -y

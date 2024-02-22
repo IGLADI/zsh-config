@@ -65,8 +65,6 @@ zplug "zsh-users/zsh-completions"
 zplug "marlonrichert/zsh-autocomplete"
 # # better history search with upper arrow
 # zplug "zsh-users/zsh-history-substring-search"
-# better history with fzf
-zplug "junegunn/fzf"
 # # for wsl add notify-send
 # notify-send() { wsl-notify-send.exe --category $WSL_DISTRO_NAME "${@}"; }
 # little notif box when a long running task is done
@@ -77,7 +75,8 @@ zplug "MichaelAquilina/zsh-auto-notify"
 zplug "hlissner/zsh-autopair"
 # little "you should use..." when an alias exist for your command
 zplug "MichaelAquilina/zsh-you-should-use"
-# ? search to fix $ prefix when copying from terminal
+# auto sudo previous cmd with dubbel esc
+zplug "ohmyzsh/ohmyzsh", use:"plugins/sudo"
 
 # Install plugins if not already installed
 if ! zplug check --verbose; then
@@ -85,10 +84,8 @@ if ! zplug check --verbose; then
     zplug install
 fi
 
-
 # Then, source zplug in your shell configuration
 zplug load
-
 
 # if there is no match in history previeuw standard completion
 export ZSH_AUTOSUGGEST_STRATEGY=(
@@ -107,27 +104,11 @@ bindkey '^[[1;5D' backward-word
 # TODO select with shift+arrows
 # Delete complete word using Ctrl+Backspace & Ctrl+Delete
 bindkey -M main -M viins -M vicmd -M emacs '^H' backward-kill-word
-bindkey -M main -M viins -M vicmd -M emacs '^[[3;5~' kill-wor
+bindkey -M main -M viins -M vicmd -M emacs '^[[3;5~' kill-word
 
-# ? open vscode projects in wsl
-
-# ! uncomment for ros2
-# # robotics
-# export ROS_DOMAIN_ID=30 #TURTLEBOT3, waffle=115, burger=30, verandert met irl robbot die je wilt controlleren
-# export TURTLEBOT3_MODEL=burger
-# #source for robotics
-# source /opt/ros/humble/setup.zsh
-# # ! not sure if needed
-# source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
-# source ~/ros2_ws/install/setup.zsh
-# source ~/turtlebot3_ws/install/setup.zsh
-# # working zsh completion for ros2
-# complete -o default -F _python_argcomplete "ros2"
-# eval "$(register-python-argcomplete3 colcon)"
-# complete -o default -F _python_argcomplete "colcon"
-
-# # add basic pip completion (won't complete packages)
-# eval "$(register-python-argcomplete3 pip)"
+# fzf for history search with ctrl r
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+source /usr/share/doc/fzf/examples/completion.zsh
 
 # use RTX instead of intel GPU
 export MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA
@@ -152,19 +133,12 @@ COMPLETION_WAITING_DOTS="true"
 # see 'man strftime' for details.
 HIST_STAMPS="dd/mm/yyyy"
 
+# set bat as cat
+alias cat='batcat'
+
 # get z command (better cd)
 export PATH=$PATH:~/.local/bin
 eval "$(zoxide init zsh)"
-
-# when explicitly typing cd
-cd() {
-    __zoxide_z "$@"
-}
-
-# autocd from uses _cd, so when not explicitly typing cd
-_cd() {
-    __zoxide_z "$@"
-}
 
 # set vscode as default editor
 export EDITOR='code --wait'
@@ -178,6 +152,7 @@ alias lsimple='exa -F --icons --git --sort extension --group-directories-first'
 alias ll='exa -la -F --icons --git --sort extension --group-directories-first'
 alias la='exa -la -F --icons --git --sort extension --group-directories-first'
 alias lst='exa --tree -F --icons --git --sort extension --group-directories-first'
+alias tree='exa --tree -F --icons --git --sort extension --group-directories-first'
 alias lst1='exa --tree -L1 -F --icons --git --sort extension --group-directories-first'
 alias lst2='exa --tree -L2 -F --icons --git --sort extension --group-directories-first'
 alias lst3='exa --tree -L3 -F --icons --git --sort extension --group-directories-first'
@@ -186,6 +161,37 @@ alias lst5='exa --tree -L5 -F --icons --git --sort extension --group-directories
 alias ls.='exa -dl .*'
 alias ls='l' || alias ls='ls --color --group-directories-first --sort=extension'
 
-# colorls on cd
-my_chpwd_hook() lsimple
-chpwd_functions+=(my_chpwd_hook)
+# when explicitly typing cd
+cd() {
+    # zoxide to cd
+    __zoxide_z "$@"
+    # display the new directory
+    lsimple
+}
+
+# TODO open files (vscode/run) & z into dir & remove prefix $ and retry
+# aka autoz for autocd
+# when not explicitly typing cd
+# command_not_found_handler () {
+
+# }
+
+# ? open vscode projects in wsl
+
+# ! uncomment for ros2
+# # robotics
+# export ROS_DOMAIN_ID=30 #TURTLEBOT3, waffle=115, burger=30, verandert met irl robbot die je wilt controlleren
+# export TURTLEBOT3_MODEL=burger
+# #source for robotics
+# source /opt/ros/humble/setup.zsh
+# # ! not sure if needed
+# source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
+# source ~/ros2_ws/install/setup.zsh
+# source ~/turtlebot3_ws/install/setup.zsh
+# # working zsh completion for ros2
+# complete -o default -F _python_argcomplete "ros2"
+# eval "$(register-python-argcomplete3 colcon)"
+# complete -o default -F _python_argcomplete "colcon"
+
+# # add basic pip completion (won't complete packages)
+# eval "$(register-python-argcomplete3 pip)"
