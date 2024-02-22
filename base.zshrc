@@ -156,7 +156,13 @@ HIST_STAMPS="dd/mm/yyyy"
 export PATH=$PATH:~/.local/bin
 eval "$(zoxide init zsh)"
 
+# when explicitly typing cd
 cd() {
+    __zoxide_z "$@"
+}
+
+# autocd from uses _cd, so when not explicitly typing cd
+_cd() {
     __zoxide_z "$@"
 }
 
