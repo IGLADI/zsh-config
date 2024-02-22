@@ -158,12 +158,18 @@ eval "$(zoxide init zsh)"
 
 # when explicitly typing cd
 cd() {
+    # zoxide to cd
     __zoxide_z "$@"
+    # display the new directory
+    lsipmle
 }
 
 # autocd from uses _cd, so when not explicitly typing cd
 _cd() {
+    # zoxide to cd
     __zoxide_z "$@"
+    # display the new directory
+    lsipmle
 }
 
 # set vscode as default editor
@@ -185,7 +191,3 @@ alias lst4='exa --tree -L4 -F --icons --git --sort extension --group-directories
 alias lst5='exa --tree -L5 -F --icons --git --sort extension --group-directories-first'
 alias ls.='exa -dl .*'
 alias ls='l' || alias ls='ls --color --group-directories-first --sort=extension'
-
-# colorls on cd
-my_chpwd_hook() lsimple
-chpwd_functions+=(my_chpwd_hook)
