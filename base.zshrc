@@ -140,6 +140,22 @@ alias cat='batcat'
 export PATH=$PATH:~/.local/bin
 eval "$(zoxide init zsh)"
 
+# when explicitly typing cd
+cd() {
+    # zoxide to cd
+    __zoxide_z "$@"
+    # display the new directory
+    lsipmle
+}
+
+# autocd from uses _cd, so when not explicitly typing cd
+_cd() {
+    # zoxide to cd
+    __zoxide_z "$@"
+    # display the new directory
+    lsipmle
+}
+
 # set vscode as default editor
 export EDITOR='code --wait'
 
