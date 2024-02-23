@@ -181,16 +181,19 @@ alias ls='l' || alias ls='ls --color --group-directories-first --sort=extension'
 cd() {
     # zoxide to cd
     __zoxide_z "$@"
-    # display the new directory
-    lsimple
 }
+
 
 # TODO open files (vscode/run) & z into dir & remove prefix $ and retry
 # aka autoz for autocd
 # when not explicitly typing cd
 # command_not_found_handler () {
-
 # }
+
+# hook to ls on dir change
+chpwd() {
+    lsimple
+}
 
 # ? open vscode projects in wsl
 
