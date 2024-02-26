@@ -134,7 +134,9 @@ COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="dd/mm/yyyy"
 
 # set bat as cat
-alias cat='batcat'
+cat() {
+    batcat "$@" || bat "$@" || cat "$@"
+}
 
 # get z command (better cd)
 export PATH=$PATH:~/.local/bin
@@ -162,8 +164,10 @@ alias ls='l' || alias ls='ls --color --group-directories-first --sort=extension'
 cd() {
     # zoxide to cd
     __zoxide_z "$@"
-    lsimple
 }
+
+my_chpwd_hook() lsimple
+chpwd_functions+=(my_chpwd_hook)
 
 
 # TODO open files (vscode/run) & z into dir & remove prefix $ and retry
