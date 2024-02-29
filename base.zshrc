@@ -105,6 +105,7 @@ bindkey '^[[1;5D' backward-word
 # Delete complete word using Ctrl+Backspace & Ctrl+Delete
 bindkey -M main -M viins -M vicmd -M emacs '^H' backward-kill-word
 bindkey -M main -M viins -M vicmd -M emacs '^[[3;5~' kill-word
+# TODO select text with shift+arrows
 
 # fzf for history search with ctrl r
 source /usr/share/doc/fzf/examples/key-bindings.zsh
