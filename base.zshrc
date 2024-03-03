@@ -68,7 +68,8 @@ zplug "marlonrichert/zsh-autocomplete"
 # # for wsl add notify-send
 # notify-send() { wsl-notify-send.exe --category $WSL_DISTRO_NAME "${@}"; }
 # little notif box when a long running task is done
-zplug "MichaelAquilina/zsh-auto-notify"
+# ! only set on personal linux machines
+# zplug "MichaelAquilina/zsh-auto-notify"
 # # add notify-send to wsl path
 # export PATH=$PATH:~/wsl-notify-send_windows_amd64
 # auto set } with { like an IDE would
