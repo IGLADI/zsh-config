@@ -46,6 +46,13 @@ setopt no_beep
 # don't have annoying windows beeeeppppp destroying ears just in case as I hate it
 unsetopt beep
 
+# open tmux
+# tmux
+# fixes bug between already existing tmux session and p10k
+# if [ -z "$TMUX" ]; then
+#   exec tmux new-session -A -s main
+# fi
+
 # Load zplug
 source ~/.zplug/init.zsh
 
@@ -136,9 +143,11 @@ COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="dd/mm/yyyy"
 
 # set bat as cat
-cat() {
+bcat() {
     batcat "$@" || bat "$@" || cat "$@"
 }
+alias cat='bcat'
+
 
 # get z command (better cd)
 export PATH=$PATH:~/.local/bin
@@ -148,26 +157,27 @@ eval "$(zoxide init zsh)"
 alias ip='ip -c'
 
 # better ls
-alias l='exa -l -F --icons --git --sort extension --group-directories-first'
-alias lsimple='exa -F --icons --git --sort extension --group-directories-first'
-alias ll='exa -la -F --icons --git --sort extension --group-directories-first'
-alias la='exa -la -F --icons --git --sort extension --group-directories-first'
-alias lst='exa --tree -F --icons --git --sort extension --group-directories-first'
-alias tree='exa --tree -F --icons --git --sort extension --group-directories-first'
-alias lst1='exa --tree -L1 -F --icons --git --sort extension --group-directories-first'
-alias lst2='exa --tree -L2 -F --icons --git --sort extension --group-directories-first'
-alias lst3='exa --tree -L3 -F --icons --git --sort extension --group-directories-first'
-alias lst4='exa --tree -L4 -F --icons --git --sort extension --group-directories-first'
-alias lst5='exa --tree -L5 -F --icons --git --sort extension --group-directories-first'
-alias ls.='exa -dl .*'
+alias l='eza -l -F --icons --git --sort extension --group-directories-first'
+alias lsimple='eza -F --icons --git --sort extension --group-directories-first'
+alias ll='eza -la -F --icons --git --sort extension --group-directories-first'
+alias la='eza -la -F --icons --git --sort extension --group-directories-first'
+alias lst='eza --tree -F --icons --git --sort extension --group-directories-first'
+alias tree='eza --tree -F --icons --git --sort extension --group-directories-first'
+alias lst1='eza --tree -L1 -F --icons --git --sort extension --group-directories-first'
+alias lst2='eza --tree -L2 -F --icons --git --sort extension --group-directories-first'
+alias lst3='eza --tree -L3 -F --icons --git --sort extension --group-directories-first'
+alias lst4='eza --tree -L4 -F --icons --git --sort extension --group-directories-first'
+alias lst5='eza --tree -L5 -F --icons --git --sort extension --group-directories-first'
+alias ls.='eza -dl .*'
 alias ls='l' || alias ls='ls --color --group-directories-first --sort=extension'
 
-# when explicitly typing cd
+# when explicitly typing cd, no compdef as cd completion is better rn
 cd() {
     # zoxide to cd
     __zoxide_z "$@"
 }
 
+# ls when changing directory
 my_chpwd_hook() lsimple
 chpwd_functions+=(my_chpwd_hook)
 
@@ -175,8 +185,8 @@ chpwd_functions+=(my_chpwd_hook)
 # TODO open files (vscode/run) & z into dir & remove prefix $ and retry
 # aka autoz for autocd
 # when not explicitly typing cd
-command_not_found_handler () {
-}
+# command_not_found_handler () {
+# }
 
 # ? open vscode projects in wsl
 
@@ -197,3 +207,6 @@ command_not_found_handler () {
 
 # # add basic pip completion (won't complete packages)
 # eval "$(register-python-argcomplete3 pip)"
+
+# when opening a new terminal show the folder content
+# lsimple

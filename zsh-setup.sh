@@ -1,5 +1,8 @@
 #!/bin/bash
 
+sudo apt update -y
+sudo apt upgrade -y
+
 echo "\033[34mInstalling git...\033[0m"
 sudo apt install git -y
 
@@ -68,6 +71,15 @@ echo "\033[34mSetting MesloLGS NF font for the terminal...\033[0m"
 gsettings set org.gnome.desktop.interface monospace-font-name 'MesloLGS NF Regular 11'
 echo "\033[34mFont installation and configuration complete.\033[0m"
 
+echo "\033[34mInstalling tmux...\033[0m"
+sudo apt install tmux -y
+
+echo "\033[34mInstalling tmux plugin manager...\033[0m"
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+echo "\033[34mCopying the base tmux config file...\033[0m"
+cp ./base.tmux.conf ~/.tmux.conf
+
 echo "\033[34mInstalling zoxide...\033[0m"
 curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
 export PATH="$PATH:/root/.local/bin"
@@ -79,13 +91,14 @@ USER_HOME=$(getent passwd $(whoami) | cut -d: -f6)
 export PATH="$PATH:$USER_HOME/.local/bin"
 echo "\033[34mPATH updated.\033[0m"
 
-echo "\033[34mInstalling exa...\033[0m"
-curl https://sh.rustup.rs -sSf | sh
-# reload path
-source $HOME/.cargo/env
-source $HOME/.cargo/bin
-rustup default stable
-cargo install exa
+echo "\033[34mInstalling eza...\033[0m"
+sudo apt install -y gpg
+sudo mkdir -p /etc/apt/keyrings
+wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
+echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list
+sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
+sudo apt update
+sudo apt install -y eza
 echo "\033[34mexa installed.\033[0m"
 
 sudo apt autoremove -y
