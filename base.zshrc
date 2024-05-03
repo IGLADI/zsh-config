@@ -50,7 +50,7 @@ unsetopt beep
 # tmux
 # fixes bug between already existing tmux session and p10k
 # if [ -z "$TMUX" ]; then
-#   exec tmux new-session -A -s main
+#     exec tmux new-session -A -s main
 # fi
 
 # Load zplug
@@ -142,11 +142,11 @@ COMPLETION_WAITING_DOTS="true"
 # see 'man strftime' for details.
 HIST_STAMPS="dd/mm/yyyy"
 
+# # disable auto new line on long commands
+# setterm -linewrap off
+
 # set bat as cat
-bcat() {
-    batcat "$@" || bat "$@" || cat "$@"
-}
-alias cat='bcat'
+alias cat='bat'
 
 
 # get z command (better cd)

@@ -21,6 +21,9 @@ echo "\033[34mUpdating and upgrading the system...\033[0m"
 sudo apt update -y && apt upgrade -y
 
 echo "\033[34mInstalling bat...\033[0m"
+echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+echo "\033[31mIf on debian/ubuntu please use dpkg per the official docs instead\033[0m"
+echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 sudo apt install bat -y
 
 echo "==================================================================="
