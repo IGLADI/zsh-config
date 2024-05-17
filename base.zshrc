@@ -2,10 +2,18 @@
 HISTFILE=~/.histfile
 HISTSIZE=100000
 SAVEHIST=100000
+# don't put duplicate lines or lines starting with space in the history.
+HISTDUP=erase
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '$HOME/.zshrc'
+# completion between lower and upper case
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# completion with EZA colors
+export EZA_COLORS="$(vivid generate molokai)"
+EZA_COLORS="$(vivid generate molokai)"
+zstyle ':completion:*' list-colors ${(s.:.)EZA_COLORS}
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
@@ -33,8 +41,12 @@ setopt nonomatch
 setopt autocd
 # complete while the cursor is inside a word
 setopt completeinword
-# remove duplicates in history
+# remove duplicates&spaces in history
 setopt histignoredups
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_find_no_dups
+setopt histignorespace
 # remove excessive whitespace from history
 setopt histreduceblanks
 # enable comments on commandline
@@ -45,6 +57,10 @@ setopt notify
 setopt no_beep
 # don't have annoying windows beeeeppppp destroying ears just in case as I hate it
 unsetopt beep
+# apend instead of overwrite history
+setopt appendhistory
+# live share history between shells
+setopt sharehistory
 
 # open tmux
 # tmux
@@ -148,7 +164,6 @@ HIST_STAMPS="dd/mm/yyyy"
 # set bat as cat
 alias cat='bat'
 
-
 # get z command (better cd)
 export PATH=$PATH:~/.local/bin
 eval "$(zoxide init zsh)"
@@ -180,7 +195,6 @@ cd() {
 # ls when changing directory
 my_chpwd_hook() lsimple
 chpwd_functions+=(my_chpwd_hook)
-
 
 # TODO open files (vscode/run) & z into dir & remove prefix $ and retry
 # aka autoz for autocd

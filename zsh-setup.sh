@@ -26,6 +26,10 @@ echo "\033[31mIf on debian/ubuntu please use dpkg per the official docs instead\
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 sudo apt install bat -y
 
+echo "\033[34mInstalling vivid colorscheme...\033[0m"
+wget "https://github.com/sharkdp/vivid/releases/download/v0.8.0/vivid_0.8.0_amd64.deb"
+sudo dpkg -i vivid_0.8.0_amd64.deb
+
 echo "==================================================================="
 echo "\033[34mCopying the base config files...\033[0m"
 cp ./base.zshrc ~/.zshrc
