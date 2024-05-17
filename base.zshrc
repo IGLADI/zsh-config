@@ -173,6 +173,7 @@ alias ip='ip -c'
 
 # better ls
 alias l='eza -l -F --icons --git --sort extension --group-directories-first'
+alias lsa='eza -la -F --icons --git --sort extension --group-directories-first'
 alias lsimple='eza -F --icons --git --sort extension --group-directories-first'
 alias ll='eza -la -F --icons --git --sort extension --group-directories-first'
 alias la='eza -la -F --icons --git --sort extension --group-directories-first'
