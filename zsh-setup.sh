@@ -30,6 +30,9 @@ echo "\033[34mInstalling vivid colorscheme...\033[0m"
 wget "https://github.com/sharkdp/vivid/releases/download/v0.8.0/vivid_0.8.0_amd64.deb"
 sudo dpkg -i vivid_0.8.0_amd64.deb
 
+echo
+git clone https://github.com/Aloxaf/fzf-tab ~/zsh-fzf-tab
+
 echo "==================================================================="
 echo "\033[34mCopying the base config files...\033[0m"
 cp ./base.zshrc ~/.zshrc

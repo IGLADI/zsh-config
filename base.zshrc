@@ -102,6 +102,20 @@ zplug "MichaelAquilina/zsh-you-should-use"
 # auto sudo previous cmd with dubbel esc
 zplug "ohmyzsh/ohmyzsh", use:"plugins/sudo"
 
+# fzf on arrow up
+# eval "$(fzf --zsh)"
+# ! TODO see github issue
+# fzf for completion
+source ~/zsh-fzf-tab/fzf-tab.plugin.zsh
+# zplug "AntonKozikov/fzf-tab"
+# zstyle ':completion:*' menu no
+# little previeuw of folder content
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -l -F --icons --git --sort extension --group-directories-first --color=always $realpath'
+# TODO maybe add cat/nano/vim/... to previeuw bat files hovering/typing
+
+# always show completion menu from fzf-tab
+
+
 # Install plugins if not already installed
 if ! zplug check --verbose; then
     printf "Installing zplug plugins...\n"
@@ -161,8 +175,11 @@ HIST_STAMPS="dd/mm/yyyy"
 # # disable auto new line on long commands
 # setterm -linewrap off
 
+# easy temp dir
+alias tmpd='cd $(mktemp -d)'
+
 # set bat as cat
-alias cat='bat'
+which bat > /dev/null 2>&1 && alias cat='bat'
 
 # get z command (better cd)
 export PATH=$PATH:~/.local/bin
@@ -172,20 +189,38 @@ eval "$(zoxide init zsh)"
 alias ip='ip -c'
 
 # better ls
-alias l='eza -l -F --icons --git --sort extension --group-directories-first'
-alias lsa='eza -la -F --icons --git --sort extension --group-directories-first'
-alias lsimple='eza -F --icons --git --sort extension --group-directories-first'
-alias ll='eza -la -F --icons --git --sort extension --group-directories-first'
-alias la='eza -la -F --icons --git --sort extension --group-directories-first'
-alias lst='eza --tree -F --icons --git --sort extension --group-directories-first'
-alias tree='eza --tree -F --icons --git --sort extension --group-directories-first'
-alias lst1='eza --tree -L1 -F --icons --git --sort extension --group-directories-first'
-alias lst2='eza --tree -L2 -F --icons --git --sort extension --group-directories-first'
-alias lst3='eza --tree -L3 -F --icons --git --sort extension --group-directories-first'
-alias lst4='eza --tree -L4 -F --icons --git --sort extension --group-directories-first'
-alias lst5='eza --tree -L5 -F --icons --git --sort extension --group-directories-first'
-alias ls.='eza -dl .*'
-alias ls='l' || alias ls='ls --color --group-directories-first --sort=extension'
+if command -v eza &> /dev/null; then
+    alias l='eza -l -F --icons --git --sort extension --group-directories-first'
+    alias lsa='eza -la -F --icons --git --sort extension --group-directories-first'
+    alias lsimple='eza -F --icons --git --sort extension --group-directories-first'
+    alias ll='eza -la -F --icons --git --sort extension --group-directories-first'
+    alias la='eza -la -F --icons --git --sort extension --group-directories-first'
+    alias lst='eza --tree -F --icons --git --sort extension --group-directories-first'
+    alias tree='eza --tree -F --icons --git --sort extension --group-directories-first'
+    alias lst1='eza --tree -L1 -F --icons --git --sort extension --group-directories-first'
+    alias lst2='eza --tree -L2 -F --icons --git --sort extension --group-directories-first'
+    alias lst3='eza --tree -L3 -F --icons --git --sort extension --group-directories-first'
+    alias lst4='eza --tree -L4 -F --icons --git --sort extension --group-directories-first'
+    alias lst5='eza --tree -L5 -F --icons --git --sort extension --group-directories-first'
+    alias ls.='eza -dl .*'
+    alias ls='l'
+else
+    alias l='ls -l --color --group-directories-first --sort=extension'
+    alias lsa='ls -la --color --group-directories-first --sort=extension'
+    alias lsimple='ls --color --group-directories-first --sort=extension'
+    alias ll='ls -la --color --group-directories-first --sort=extension'
+    alias la='ls -la --color --group-directories-first --sort=extension'
+    alias lst='ls --color --group-directories-first --sort=extension | tree'
+    alias tree='ls --color --group-directories-first --sort=extension | tree'
+    alias lst1='ls --color --group-directories-first --sort=extension | tree -L 1'
+    alias lst2='ls --color --group-directories-first --sort=extension | tree -L 2'
+    alias lst3='ls --color --group-directories-first --sort=extension | tree -L 3'
+    alias lst4='ls --color --group-directories-first --sort=extension | tree -L 4'
+    alias lst5='ls --color --group-directories-first --sort=extension | tree -L 5'
+    alias ls.='ls -d .* --color'
+    alias ls='ls --color --group-directories-first --sort=extension'
+fi
+
 
 # when explicitly typing cd, no compdef as cd completion is better rn
 cd() {
