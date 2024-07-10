@@ -106,7 +106,8 @@ zplug "ohmyzsh/ohmyzsh", use:"plugins/sudo"
 # eval "$(fzf --zsh)"
 # ! TODO see github issue
 # fzf for completion
-source ~/zsh-fzf-tab/fzf-tab.plugin.zsh
+# zplug "Aloxaf/fzf-tab"
+# source ~/zsh-fzf-tab/fzf-tab.plugin.zsh
 # zplug "AntonKozikov/fzf-tab"
 # zstyle ':completion:*' menu no
 # little previeuw of folder content
