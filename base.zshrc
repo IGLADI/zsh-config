@@ -104,7 +104,7 @@ zplug "ohmyzsh/ohmyzsh", use:"plugins/sudo"
 
 # fzf on arrow up
 # eval "$(fzf --zsh)"
-# ! TODO see github issue
+# not used anymore as I use zi/cdi
 # fzf for completion
 # zplug "Aloxaf/fzf-tab"
 # source ~/zsh-fzf-tab/fzf-tab.plugin.zsh
@@ -181,6 +181,62 @@ alias tmpd='cd $(mktemp -d)'
 
 # set bat as cat
 which bat > /dev/null 2>&1 && alias cat='bat'
+# interactive search w zoxide
+which zoxide > /dev/null 2>&1 && alias cdi='zi'
+
+# set fzf to use eza and bat
+fzf_cd() {
+  # not the best implementaiton as I already alias this later
+  if command -v eza > /dev/null 2>&1; then
+    local list_cmd='eza -l -F --icons --git --sort extension --group-directories-first --color=always'
+  else
+    local list_cmd='ls -l --color --group-directories-first --sort=extension'
+  fi
+  
+  # get selection + preview
+  local selected=$(eval "$list_cmd" | fzf \
+    --preview '{
+        preview=$(echo {} | awk "{print \$NF}" | xargs -I{} sh -c "bat --color=always --style=numbers --line-range :500 {} 2>/dev/null")
+        if [ $? -ne 0 ]; then
+            echo {} | awk "{print \$NF}" | xargs eza -l -F --icons --git --sort extension --group-directories-first --color=always
+        else
+            echo "$preview"
+        fi
+    }' \
+    --ansi --preview-window=right:60% \
+    --height=100% \
+    --border=rounded \
+    --header='Select a file or directory'
+  )
+  
+  # check if a selection was made, think this will me let ctrl+c out of the selection where I'm at my destination
+  if [ -z "$selected" ]; then
+    echo "No selection made."
+    return 1
+  fi
+
+  # get the path
+  local selected_path=$(echo "$selected" | awk '{print $NF}')
+  
+  # change directory or open file
+  if [ -d "$selected_path" ]; then
+    cd "$selected_path" && fzf_cd || return
+  elif [ -f "$selected_path" ]; then
+    nano "$selected_path" 
+  else
+    echo "Selected item is neither a file nor a directory."
+  fi
+}
+alias cdf='fzf_cd'
+
+# auto retry ssh
+sshretry() {
+    while ! \ssh "$@"; do
+        sleep 0.5
+        echo "Retrying..."
+    done
+}
+alias ssh='sshretry'
 
 # get z command (better cd)
 export PATH=$PATH:~/.local/bin
