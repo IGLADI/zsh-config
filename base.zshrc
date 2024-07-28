@@ -232,7 +232,7 @@ alias cdf='fzf_cd'
 # auto retry ssh
 sshretry() {
     while ! \ssh "$@"; do
-        sleep 1
+        sleep 5
         echo "Retrying..."
     done
 }
