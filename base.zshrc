@@ -232,11 +232,11 @@ alias cdf='fzf_cd'
 # auto retry ssh
 sshretry() {
     while ! \ssh "$@"; do
-        sleep 5
+        sleep 1
         echo "Retrying..."
     done
 }
-alias ssh='sshretry'
+alias sshr='sshretry'
 
 # get z command (better cd)
 export PATH=$PATH:~/.local/bin
