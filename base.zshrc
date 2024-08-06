@@ -101,6 +101,7 @@ zplug "hlissner/zsh-autopair"
 zplug "MichaelAquilina/zsh-you-should-use"
 # auto sudo previous cmd with dubbel esc
 zplug "ohmyzsh/ohmyzsh", use:"plugins/sudo"
+zplug "jirutka/zsh-shift-select"
 
 # fzf on arrow up
 # eval "$(fzf --zsh)"
@@ -140,11 +141,9 @@ export ZSH_AUTOSUGGEST_STRATEGY=(
 # Move between words with Ctrl+Arrows
 bindkey '^[[1;5C' forward-word
 bindkey '^[[1;5D' backward-word
-# TODO select with shift+arrows
 # Delete complete word using Ctrl+Backspace & Ctrl+Delete
 bindkey -M main -M viins -M vicmd -M emacs '^H' backward-kill-word
 bindkey -M main -M viins -M vicmd -M emacs '^[[3;5~' kill-word
-# TODO select text with shift+arrows
 
 # fzf for history search with ctrl r
 source /usr/share/doc/fzf/examples/key-bindings.zsh
