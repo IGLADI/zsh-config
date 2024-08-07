@@ -178,6 +178,9 @@ HIST_STAMPS="dd/mm/yyyy"
 # easy temp dir
 alias tmpd='cd $(mktemp -d)'
 
+# double esc doesn't work in warp, fallback to please
+alias please="sudo !!"
+
 # set bat as cat
 which bat > /dev/null 2>&1 && alias cat='bat'
 # interactive search w zoxide

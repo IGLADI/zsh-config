@@ -40,6 +40,7 @@ echo "\033[34mInstalling fzf...\033[0m"
 sudo dnf install fzf -y
 sudo mkdir /usr/share/doc/fzf/examples
 sudo cp /usr/share/fzf/shell/* /usr/share/doc/fzf/examples
+sudo curl -o /usr/share/doc/fzf/examples/completion.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh
 
 echo "\033[34mInstalling Zsh...\033[0m"
 sudo dnf install zsh -y
