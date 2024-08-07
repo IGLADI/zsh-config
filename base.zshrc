@@ -97,8 +97,8 @@ zplug "marlonrichert/zsh-autocomplete"
 # export PATH=$PATH:~/wsl-notify-send_windows_amd64
 # auto set } with { like an IDE would
 zplug "hlissner/zsh-autopair"
-# little "you should use..." when an alias exist for your command
-zplug "MichaelAquilina/zsh-you-should-use"
+# # little "you should use..." when an alias exist for your command
+# zplug "MichaelAquilina/zsh-you-should-use"
 # auto sudo previous cmd with dubbel esc
 zplug "ohmyzsh/ohmyzsh", use:"plugins/sudo"
 zplug "jirutka/zsh-shift-select"
