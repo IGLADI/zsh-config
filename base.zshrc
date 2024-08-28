@@ -182,7 +182,7 @@ alias tmpd='cd $(mktemp -d)'
 alias please="sudo !!"
 
 # set bat as cat
-which bat > /dev/null 2>&1 && alias cat='bat'
+which bat > /dev/null 2>&1 && alias cat='bat --paging=never --style=plain'
 # interactive search w zoxide
 which zoxide > /dev/null 2>&1 && alias cdi='zi'
 
