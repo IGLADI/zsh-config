@@ -72,6 +72,8 @@ setopt sharehistory
 # Load zplug
 source ~/.zplug/init.zsh
 
+# colorize multiple things
+zplug zpm-zsh/colorize
 # add p10k theme
 zplug romkatv/powerlevel10k, as:theme, depth:1
 # zsh plugins for auto suggestion and autofill with right arrow
