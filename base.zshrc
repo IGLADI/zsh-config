@@ -24,7 +24,6 @@ compinit
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 # remove no prompt during init error
@@ -78,7 +77,7 @@ zplug zpm-zsh/colorize
 zplug romkatv/powerlevel10k, as:theme, depth:1
 # zsh plugins for auto suggestion and autofill with right arrow
 zplug "zsh-users/zsh-autosuggestions"
-# ! seems to lag with this one activated in wsl2 without desactivating windows path in /etc/wsl.conf or ZSH_HIGHLIGHT_DIRS_BLACKLIST+=("/cygdrive" "/mnt/c" "/mnt/d" "/mnt/e")
+# seems to lag with this one activated in wsl2 without desactivating windows path in /etc/wsl.conf or ZSH_HIGHLIGHT_DIRS_BLACKLIST+=("/cygdrive" "/mnt/c" "/mnt/d" "/mnt/e")
 zplug "zsh-users/zsh-syntax-highlighting"
 # unlag zsh-syntax-highlighting (ignore windows path) but still not perfect
 # ZSH_HIGHLIGHT_DIRS_BLACKLIST+=(/mnt/c)
@@ -86,14 +85,14 @@ zplug "zsh-users/zsh-syntax-highlighting"
 # source ~/config/fsh/fast-syntax-highlighting.plugin.zsh
 # don't remeber what this did
 zplug "zsh-users/zsh-completions"
-# gives the menu underneath while typting
+# gives the completion menu underneath while typting
 zplug "marlonrichert/zsh-autocomplete"
 # # better history search with upper arrow
 # zplug "zsh-users/zsh-history-substring-search"
 # # for wsl add notify-send
 # notify-send() { wsl-notify-send.exe --category $WSL_DISTRO_NAME "${@}"; }
 # little notif box when a long running task is done
-# ! only set on personal linux machines
+# only set on personal linux machines, not needed with warp
 # zplug "MichaelAquilina/zsh-auto-notify"
 # # add notify-send to wsl path
 # export PATH=$PATH:~/wsl-notify-send_windows_amd64
@@ -106,8 +105,8 @@ zplug "ohmyzsh/ohmyzsh", use:"plugins/sudo"
 zplug "jirutka/zsh-shift-select"
 
 # fzf on arrow up
-# eval "$(fzf --zsh)"
 # not used anymore as I use zi/cdi
+# eval "$(fzf --zsh)"
 # fzf for completion
 # zplug "Aloxaf/fzf-tab"
 # source ~/zsh-fzf-tab/fzf-tab.plugin.zsh
@@ -125,7 +124,6 @@ if ! zplug check --verbose; then
     printf "Installing zplug plugins...\n"
     zplug install
 fi
-
 # Then, source zplug in your shell configuration
 zplug load
 
@@ -154,7 +152,7 @@ source /usr/share/doc/fzf/examples/completion.zsh
 # use RTX instead of intel GPU
 export MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA
 
-# use vscode as default editor
+# use vscode as default editor when available
 which code > /dev/null 2>&1 && export EDITOR="code --wait"
 
 # Uncomment the following line to enable command auto-correction.
@@ -372,7 +370,7 @@ function colored() {
 }
 
 # Colorize man and dman/debman (from debian-goodies)
-function man \
+function man {\
   dman \
   debman {
   colored $0 "$@"
