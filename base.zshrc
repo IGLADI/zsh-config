@@ -155,7 +155,7 @@ source /usr/share/doc/fzf/examples/completion.zsh
 export MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA
 
 # use vscode as default editor
-export EDITOR="code --wait"
+which code > /dev/null 2>&1 && export EDITOR="code --wait"
 
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
