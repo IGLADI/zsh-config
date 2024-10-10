@@ -110,6 +110,10 @@ zsh
 cargo install vivid
 echo "\033[34mvivid installed.\033[0m"
 
+echo "\033[34mInstalling grc for colored commands...\033[0m"
+sudo dnf install grc -y
+echo "\033[34mgrc installed.\033[0m"
+
 sudo dnf autoremove -y
 echo "\033[34mDone, please restart the terminal.\033[0m"
 zsh

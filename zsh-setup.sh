@@ -111,6 +111,10 @@ sudo apt update
 sudo apt install -y eza
 echo "\033[34mexa installed.\033[0m"
 
+echo "\033[34mInstalling grc for colored commands...\033[0m"
+sudo apt install grc -y
+echo "\033[34mgrc installed.\033[0m"
+
 sudo apt autoremove -y
 echo "\033[34Done, please restart the terminal.\033[0m"
 zsh
