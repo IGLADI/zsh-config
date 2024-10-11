@@ -246,8 +246,8 @@ alias sshr='sshretry'
 export PATH=$PATH:~/.local/bin
 eval "$(zoxide init zsh)"
 
-# get color on all ip commands
-alias ip='ip -c'
+# get color on all ip commands, not needed anymore with grc
+# alias ip='ip -c'
 
 # better ls
 if command -v eza &> /dev/null; then
