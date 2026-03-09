@@ -78,9 +78,16 @@ zplug unixorn/warhol.plugin.zsh
 # add p10k theme
 zplug romkatv/powerlevel10k, as:theme, depth:1
 # zsh plugins for auto suggestion and autofill with right arrow
-zplug "zsh-users/zsh-autosuggestions"
-# seems to lag with this one activated in wsl2 without desactivating windows path in /etc/wsl.conf or ZSH_HIGHLIGHT_DIRS_BLACKLIST+=("/cygdrive" "/mnt/c" "/mnt/d" "/mnt/e")
-zplug "zsh-users/zsh-syntax-highlighting"
+if [[ "$TERM_PROGRAM" != "WarpTerminal" ]]; then
+    # Only load these if NOT in Warp (e.g., in VS Code or regular terminal)
+    [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+    zplug "zsh-users/zsh-autosuggestions"
+    # seems to lag with this one activated in wsl2 without desactivating windows path in /etc/wsl.conf or ZSH_HIGHLIGHT_DIRS_BLACKLIST+=("/cygdrive" "/mnt/c" "/mnt/d" "/mnt/e")
+    zplug "zsh-users/zsh-syntax-highlighting"
+else
+    # Quietly disable p10k instant prompt if Warp is running
+    typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+fi
 # unlag zsh-syntax-highlighting (ignore windows path) but still not perfect
 # ZSH_HIGHLIGHT_DIRS_BLACKLIST+=(/mnt/c)
 # faster version of this plugin found:
@@ -88,6 +95,7 @@ zplug "zsh-users/zsh-syntax-highlighting"
 # don't remeber what this did
 zplug "zsh-users/zsh-completions"
 # gives the completion menu underneath while typting
+# ! might need to enable this
 zplug "marlonrichert/zsh-autocomplete"
 # # better history search with upper arrow
 # zplug "zsh-users/zsh-history-substring-search"
@@ -111,6 +119,7 @@ zplug "jirutka/zsh-shift-select"
 # eval "$(fzf --zsh)"
 # fzf for completion
 # zplug "Aloxaf/fzf-tab"
+# ! might need to enable this
 # source ~/zsh-fzf-tab/fzf-tab.plugin.zsh
 # zplug "AntonKozikov/fzf-tab"
 # zstyle ':completion:*' menu no
